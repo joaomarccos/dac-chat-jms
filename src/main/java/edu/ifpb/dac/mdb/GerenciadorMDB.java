@@ -1,7 +1,7 @@
 package edu.ifpb.dac.mdb;
 
-import edu.ifpb.dac.Enviar;
-import edu.ifpb.dac.Receber;
+import edu.ifpb.dac.Produtor;
+import edu.ifpb.dac.Consumidor;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -30,10 +30,10 @@ public class GerenciadorMDB implements Serializable {
     private String mensagem = "";
 
     @EJB
-    private Enviar destino;
+    private Produtor destino;
 
     @EJB
-    private Receber leitor;
+    private Consumidor leitor;
 
     public GerenciadorMDB() {
     }

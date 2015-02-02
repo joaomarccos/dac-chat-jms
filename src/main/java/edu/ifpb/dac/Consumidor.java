@@ -18,17 +18,19 @@ import javax.jms.Queue;
  */
 @Stateless
 @LocalBean
-public class Receber {
+public class Consumidor {
 
     @Inject
-    @JMSConnectionFactory("java:global/jms/demoConnectionFactory") // <== could omit this and use the default
+    @JMSConnectionFactory("java:global/jms/demoConnectionFactory")
     private JMSContext context;
     @Resource(lookup = "java:global/jms/demoQueue")
     Queue inboundQueue;
 
     public String receberMensagem() {
         try {
-            JMSConsumer consumer = context.createConsumer(inboundQueue);
+            JMSConsumer consumer = context.createConsumer(inboundQueue);            
+//            JMSConsumer consumer = context.createConsumer(inboundQueue, "MessageFormat = 'Version 3.4'");            
+            
             try {
                 return "recebida " + consumer.receiveBody(String.class, 1000)
                         + "\n" + quantidade();
@@ -44,10 +46,10 @@ public class Receber {
     private String quantidade() throws JMSException {
         int numMessages = 0;
         for (Enumeration queueEnumeration = context.createBrowser(inboundQueue).getEnumeration(); queueEnumeration.hasMoreElements();) {
-            System.out.println("Recebendo: "+queueEnumeration.nextElement());
+            System.out.println("Recebendo: " + queueEnumeration.nextElement());
             numMessages++;
         }
-        return "Foram recebidas: " + numMessages ;
+        return "Faltam : " + numMessages + " mensagens a ser lidas";
 
     }
 }

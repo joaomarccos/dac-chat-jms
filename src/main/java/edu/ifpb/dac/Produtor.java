@@ -7,7 +7,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSContext;
+import javax.jms.JMSException;
 import javax.jms.JMSRuntimeException;
+import javax.jms.Message;
 import javax.jms.Queue;
 
 /**
@@ -16,7 +18,7 @@ import javax.jms.Queue;
  */
 @Stateless
 @LocalBean
-public class Enviar {
+public class Produtor {
 
     @Inject
     private JMSContext context;
@@ -26,9 +28,13 @@ public class Enviar {
 
     public void enviarMensagem(String body) {
         try {
-            context.createProducer().send(queue, body);
+            Message mensagem = context.createTextMessage(body);
+            mensagem.setStringProperty("MessageFormat", "Version 3.4");
+            context.createProducer().send(queue, mensagem);
         } catch (JMSRuntimeException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
+            Logger.getLogger(Produtor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
