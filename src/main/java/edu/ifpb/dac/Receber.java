@@ -21,7 +21,7 @@ import javax.jms.Queue;
 public class Receber {
 
     @Inject
-    @JMSConnectionFactory("java:global/jms/demoConnectionFactory") // <== could omit this and use the default
+    @JMSConnectionFactory("java:global/jms/demoConnectionFactory") 
     private JMSContext context;
     @Resource(lookup = "java:global/jms/demoQueue")
     Queue inboundQueue;

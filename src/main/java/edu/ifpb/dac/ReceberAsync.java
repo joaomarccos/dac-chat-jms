@@ -13,13 +13,13 @@ import javax.jms.TextMessage;
  *
  * @author Ricardo Job
  */
-@MessageDriven(mappedName = "java:global/jms/demoQueue")
-//@MessageDriven(
-//        mappedName = "java:global/jms/demoQueue",
-//        activationConfig = {
-//            @ActivationConfigProperty(propertyName = "destinationType",
-//                    propertyValue = "javax.jms.Queue")
-//        })
+//@MessageDriven(mappedName = "java:global/jms/demoQueue")
+@MessageDriven(
+        mappedName = "java:global/jms/demoQueue",
+        activationConfig = {
+            @ActivationConfigProperty(propertyName = "destinationType",
+                    propertyValue = "javax.jms.Queue")
+        })
 public class ReceberAsync implements MessageListener {
 
     @Override
