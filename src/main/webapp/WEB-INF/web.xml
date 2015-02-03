@@ -25,7 +25,7 @@
     </welcome-file-list>
     
     
-     <jms-destination>
+     <jms-destination>         
         <name>java:global/jms/demoQueue</name>
         <interface-name>javax.jms.Queue</interface-name>
         <destination-name>demoQueue</destination-name>
@@ -34,6 +34,26 @@
     <jms-connection-factory>
         <description>ConnectionFactory to use in demonstration</description>
         <name>java:global/jms/demoConnectionFactory</name>
+        <user>guest</user>
+        <password>guest</password>
+        <property>
+            <name>addressList</name>
+            <value>mq://localhost:7676</value>
+        </property>
+       
+        <max-pool-size>30</max-pool-size>
+        <min-pool-size>20</min-pool-size>
+    </jms-connection-factory>
+    
+     <jms-destination>         
+        <name>java:global/jms/demoTopic</name>
+        <interface-name>javax.jms.Topic</interface-name>
+        <destination-name>demoTopic</destination-name>
+    </jms-destination>
+
+    <jms-connection-factory>
+        <description>ConnectionFactory to use in demonstration</description>
+        <name>java:global/jms/demoConnectionFactoryTopic</name>
         <user>guest</user>
         <password>guest</password>
         <property>

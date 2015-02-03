@@ -1,4 +1,4 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.mdb.queue;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,13 +24,14 @@ public class Produtor {
     private JMSContext context;
 
     @Resource(lookup = "java:global/jms/demoQueue")
-    Queue queue;
+    Queue canalDeDestino;
+//    Topic canalDeDestino;
 
     public void enviarMensagem(String body) {
         try {
             Message mensagem = context.createTextMessage(body);
             mensagem.setStringProperty("MessageFormat", "Version 3.4");
-            context.createProducer().send(queue, mensagem);
+            context.createProducer().send(canalDeDestino, mensagem);
         } catch (JMSRuntimeException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
         } catch (JMSException ex) {

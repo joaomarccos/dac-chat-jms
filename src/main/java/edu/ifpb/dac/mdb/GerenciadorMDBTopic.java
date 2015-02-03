@@ -1,7 +1,6 @@
 package edu.ifpb.dac.mdb;
 
-import edu.ifpb.dac.Produtor;
-import edu.ifpb.dac.Consumidor;
+import edu.ifpb.dac.mdb.topic.ProdutorTopic;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -14,38 +13,31 @@ import javax.jms.JMSDestinationDefinition;
  * @author Ricardo Job
  */
 @JMSDestinationDefinition(
-        name = "java:global/jms/demoQueue",
-        description = "Queue  usada na aula",
-        interfaceName = "javax.jms.Queue"
+        name = "java:global/jms/demoTopic",
+        description = "Topic  usada na aula",
+        interfaceName = "javax.jms.Topic"
 )
 @JMSConnectionFactoryDefinition(
-        name = "java:global/jms/demoConnectionFactory",
-        description = "ConnectionFactory usada na aula"
+        name = "java:global/jms/demoConnectionFactoryTopic",
+        description = "ConnectionFactoryTopic usada na aula"
 )
 
-@Named(value = "gerenciador")
+@Named(value = "gerenciadorTopic")
 @SessionScoped
-public class GerenciadorMDB implements Serializable {
+public class GerenciadorMDBTopic implements Serializable {
 
     private String mensagem = "";
 
     @EJB
-    private Produtor destino;
+    private ProdutorTopic destino;
 
-    @EJB
-    private Consumidor leitor;
-
-    public GerenciadorMDB() {
+    public GerenciadorMDBTopic() {
     }
 
     public String enviar() {
         destino.enviarMensagem(mensagem);
         mensagem = "";
         return null;
-    }
-
-    public String recebendoMensagem() {
-        return leitor.receberMensagem();
     }
 
     public String getMensagem() {

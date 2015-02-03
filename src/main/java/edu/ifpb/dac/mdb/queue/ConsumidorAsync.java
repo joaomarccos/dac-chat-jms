@@ -1,4 +1,4 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.mdb.queue;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

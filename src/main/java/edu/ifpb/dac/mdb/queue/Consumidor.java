@@ -1,4 +1,4 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.mdb.queue;
 
 import java.util.Enumeration;
 import javax.annotation.Resource;
@@ -24,11 +24,11 @@ public class Consumidor {
     @JMSConnectionFactory("java:global/jms/demoConnectionFactory")
     private JMSContext context;
     @Resource(lookup = "java:global/jms/demoQueue")
-    Queue inboundQueue;
+    Queue canalDeComunicacao;
 
     public String receberMensagem() {
         try {
-            JMSConsumer consumer = context.createConsumer(inboundQueue);            
+            JMSConsumer consumer = context.createConsumer(canalDeComunicacao);            
 //            JMSConsumer consumer = context.createConsumer(inboundQueue, "MessageFormat = 'Version 3.4'");            
             
             try {
@@ -45,7 +45,7 @@ public class Consumidor {
 
     private String quantidade() throws JMSException {
         int numMessages = 0;
-        for (Enumeration queueEnumeration = context.createBrowser(inboundQueue).getEnumeration(); queueEnumeration.hasMoreElements();) {
+        for (Enumeration queueEnumeration = context.createBrowser(canalDeComunicacao).getEnumeration(); queueEnumeration.hasMoreElements();) {
             System.out.println("Recebendo: " + queueEnumeration.nextElement());
             numMessages++;
         }
