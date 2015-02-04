@@ -1,4 +1,4 @@
-package edu.ifpb.dac;
+package edu.ifpb.dac.mdb.queue;
 
 import java.util.Enumeration;
 import javax.annotation.Resource;
@@ -18,17 +18,23 @@ import javax.jms.Queue;
  */
 @Stateless
 @LocalBean
-public class Receber {
+public class Consumidor {
 
     @Inject
+<<<<<<< HEAD:src/main/java/edu/ifpb/dac/Receber.java
     @JMSConnectionFactory("java:global/jms/demoConnectionFactory") 
+=======
+    @JMSConnectionFactory("java:global/jms/demoConnectionFactory")
+>>>>>>> 5d854149af3ab55895d13004358865462326f03a:src/main/java/edu/ifpb/dac/mdb/queue/Consumidor.java
     private JMSContext context;
     @Resource(lookup = "java:global/jms/demoQueue")
-    Queue inboundQueue;
+    Queue canalDeComunicacao;
 
     public String receberMensagem() {
         try {
-            JMSConsumer consumer = context.createConsumer(inboundQueue);
+            JMSConsumer consumer = context.createConsumer(canalDeComunicacao);            
+//            JMSConsumer consumer = context.createConsumer(inboundQueue, "MessageFormat = 'Version 3.4'");            
+            
             try {
                 return "recebida " + consumer.receiveBody(String.class, 1000)
                         + "\n" + quantidade();
@@ -43,11 +49,11 @@ public class Receber {
 
     private String quantidade() throws JMSException {
         int numMessages = 0;
-        for (Enumeration queueEnumeration = context.createBrowser(inboundQueue).getEnumeration(); queueEnumeration.hasMoreElements();) {
-            System.out.println("Recebendo: "+queueEnumeration.nextElement());
+        for (Enumeration queueEnumeration = context.createBrowser(canalDeComunicacao).getEnumeration(); queueEnumeration.hasMoreElements();) {
+            System.out.println("Recebendo: " + queueEnumeration.nextElement());
             numMessages++;
         }
-        return "Foram recebidas: " + numMessages ;
+        return "Faltam : " + numMessages + " mensagens a ser lidas";
 
     }
 }
