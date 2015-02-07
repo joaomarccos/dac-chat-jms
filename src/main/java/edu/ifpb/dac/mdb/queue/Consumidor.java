@@ -21,12 +21,8 @@ import javax.jms.Queue;
 public class Consumidor {
 
     @Inject
-<<<<<<< HEAD:src/main/java/edu/ifpb/dac/Receber.java
     @JMSConnectionFactory("java:global/jms/demoConnectionFactory") 
-=======
-    @JMSConnectionFactory("java:global/jms/demoConnectionFactory")
->>>>>>> 5d854149af3ab55895d13004358865462326f03a:src/main/java/edu/ifpb/dac/mdb/queue/Consumidor.java
-    private JMSContext context;
+  private JMSContext context;
     @Resource(lookup = "java:global/jms/demoQueue")
     Queue canalDeComunicacao;
 
