@@ -1,7 +1,9 @@
 package edu.ifpb.dac.mdb;
 
+import edu.ifpb.dac.mdb.topic.ConsumidorTopicAsync;
 import edu.ifpb.dac.mdb.topic.ProdutorTopic;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -27,9 +29,15 @@ import javax.jms.JMSDestinationDefinition;
 public class GerenciadorMDBTopic implements Serializable {
 
     private String mensagem = "";
+    private String user = "";
 
     @EJB
     private ProdutorTopic destino;
+    
+    @EJB
+    private ConsumidorTopicAsync consumidor;
+    
+    private List<String> mensagensRecebidas;
 
     public GerenciadorMDBTopic() {
     }
@@ -39,6 +47,10 @@ public class GerenciadorMDBTopic implements Serializable {
         mensagem = "";
         return null;
     }
+    
+    public String entrar(){
+        return "chat";
+    }
 
     public String getMensagem() {
         return mensagem;
@@ -46,6 +58,11 @@ public class GerenciadorMDBTopic implements Serializable {
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+    
+    public List<String> getMensagensRecebidas (){
+        this.mensagensRecebidas = consumidor.getMensagens();
+        return mensagensRecebidas;
     }
 
 }

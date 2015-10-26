@@ -7,9 +7,10 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:inputTextarea value="#{gerenciador.mensagem}" />
+            <h:outputText value="Informe seu nome:" />
+            <h:inputTextarea value="#{gerenciador.user}" />
             <h:commandButton value="enviar"
-                             action="#{gerenciador.enviar()}" />
+                             action="#{gerenciador.entrar()}" />
         </h:form>
     </h:body>
 </html>
