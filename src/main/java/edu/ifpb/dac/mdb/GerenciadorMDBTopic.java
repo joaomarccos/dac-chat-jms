@@ -1,5 +1,6 @@
 package edu.ifpb.dac.mdb;
 
+import edu.ifpb.dac.listener.MensagemListener;
 import edu.ifpb.dac.mdb.topic.ConsumidorTopicAsync;
 import edu.ifpb.dac.mdb.topic.ProdutorTopic;
 import java.io.Serializable;
@@ -26,7 +27,7 @@ import javax.jms.JMSDestinationDefinition;
 
 @Named(value = "gerenciadorTopic")
 @SessionScoped
-public class GerenciadorMDBTopic implements Serializable {
+public class GerenciadorMDBTopic implements Serializable, MensagemListener {
 
     private String mensagem = "";
     private String user = "";
@@ -40,6 +41,7 @@ public class GerenciadorMDBTopic implements Serializable {
     private List<String> mensagensRecebidas;
 
     public GerenciadorMDBTopic() {
+        consumidor.setListener(this);
     }
 
     public String enviar() {
@@ -63,6 +65,11 @@ public class GerenciadorMDBTopic implements Serializable {
     public List<String> getMensagensRecebidas (){
         this.mensagensRecebidas = consumidor.getMensagens();
         return mensagensRecebidas;
+    }
+
+    @Override
+    public void avisar(String msg) {
+        this.mensagensRecebidas.add(msg);
     }
 
 }
