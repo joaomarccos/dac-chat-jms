@@ -30,7 +30,7 @@ public class Produtor {
     public void enviarMensagem(String body) {
         try {
             Message mensagem = context.createTextMessage(body);
-            mensagem.setStringProperty("MessageFormat", "Version 3.4");
+            mensagem.setStringProperty("sexo", "homem"); //seletor
             context.createProducer().send(canalDeDestino, mensagem);
         } catch (JMSRuntimeException ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);

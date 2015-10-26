@@ -21,16 +21,19 @@ import javax.jms.Queue;
 public class Consumidor {
 
     @Inject
-    @JMSConnectionFactory("java:global/jms/demoConnectionFactory") 
-  private JMSContext context;
+    @JMSConnectionFactory("java:global/jms/demoConnectionFactory")
+    private JMSContext context;
+    
     @Resource(lookup = "java:global/jms/demoQueue")
     Queue canalDeComunicacao;
 
     public String receberMensagem() {
         try {
-            JMSConsumer consumer = context.createConsumer(canalDeComunicacao);            
-//            JMSConsumer consumer = context.createConsumer(inboundQueue, "MessageFormat = 'Version 3.4'");            
-            
+//            JMSConsumer consumer = context.createConsumer(canalDeComunicacao);            
+            JMSConsumer consumer = 
+                    context.createConsumer(
+                            canalDeComunicacao, "sexo = 'homem'");
+
             try {
                 return "recebida " + consumer.receiveBody(String.class, 1000)
                         + "\n" + quantidade();

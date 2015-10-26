@@ -13,15 +13,15 @@ import javax.jms.TextMessage;
  *
  * @author Ricardo Job
  */
-@MessageDriven(mappedName = "java:global/jms/demoQueue")
-//@MessageDriven(
-//        mappedName = "java:global/jms/demoQueue",
-//        activationConfig = {
-//            @ActivationConfigProperty(propertyName = "destinationType",
-//                    propertyValue = "javax.jms.Queue"),
-//            @ActivationConfigProperty(propertyName = "messageSelector",
-//                    propertyValue = "MessageFormat = 'Version 3.4'")
-//        })
+//@MessageDriven(mappedName = "java:global/jms/demoQueue")
+@MessageDriven(
+        mappedName = "java:global/jms/demoQueue",
+        activationConfig = {
+            @ActivationConfigProperty(propertyName = "destinationType",
+                    propertyValue = "javax.jms.Queue"),
+            @ActivationConfigProperty(propertyName = "messageSelector",
+                    propertyValue = "sexo = 'homem'")
+        })
 public class ConsumidorAsync implements MessageListener {
  
     @Override

@@ -24,15 +24,15 @@ import javax.jms.TextMessage;
 //                    propertyValue = "MessageFormat = 'Version 3.1'")
                     propertyValue = "MessageFormat = 'Version 3.4'")
         })
-public class ConsumidorTopicAsync implements MessageListener {
+public class SegundoConsumidorTopicAsync implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
         try {
             TextMessage tm = (TextMessage) message;
-            System.out.println("Mensagem Recebida do Topic: " + tm.getText());
+            System.out.println("Chegou: " + tm.getText());
         } catch (JMSException ex) {
-            Logger.getLogger(ConsumidorTopicAsync.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SegundoConsumidorTopicAsync.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
